@@ -6,8 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class PayrollServiceDatabase {
-	public static void main(String[] args) {
-
+	public void RetriveEmployeePayroll() {
 		String jdbcurl = "jdbc:mysql://localhost:3306/PayrollService?useSSL=false";
 		String userName = "root";
 		String password = "Tiger@123";
@@ -18,10 +17,10 @@ public class PayrollServiceDatabase {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("Driver Loaded");
 			con = DriverManager.getConnection(jdbcurl, userName, password);
-			statement= con.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from Emp_PayrollService");
+			statement = con.createStatement();
+			ResultSet resultSet = statement.executeQuery("select * from Emp_PayrollService");
 			while (resultSet.next()) {
-				
+
 				String employeeName = resultSet.getString("employee_name");
 				int employeeSalary = resultSet.getInt("salary");
 				System.out.print(employeeName + " ");
@@ -33,5 +32,10 @@ public class PayrollServiceDatabase {
 			e.printStackTrace();
 		}
 
+	}
+
+	public static void main(String[] args) {
+		PayrollServiceDatabase rv = new PayrollServiceDatabase();
+		rv.RetriveEmployeePayroll();
 	}
 }
